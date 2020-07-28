@@ -12,21 +12,21 @@ public class LightController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+            transform.position += Vector3.left * moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+            transform.position += Vector3.right * moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            transform.position -= Vector3.forward * moveSpeed * Time.deltaTime;
+            transform.position += Vector3.up * moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.position -= Vector3.back * moveSpeed * Time.deltaTime;
+            transform.position += Vector3.down * moveSpeed * Time.deltaTime;
         }
-        if(Input.GetKey(KeyCode.L))
+        if (Input.GetKey(KeyCode.L))
         {
             transform.Rotate(0.0f, rotateSpeed * Time.deltaTime, 0.0f);
         }

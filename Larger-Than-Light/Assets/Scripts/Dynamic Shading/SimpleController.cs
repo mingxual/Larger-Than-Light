@@ -17,13 +17,15 @@ public class SimpleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
-            transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+            rb.velocity = Vector2.right * 0.0f + Vector2.up * rb.velocity.y;
+            transform.position += Vector3.left * moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+            rb.velocity = Vector2.right * 0.0f + Vector2.up * rb.velocity.y;
+            transform.position += Vector3.right * moveSpeed * Time.deltaTime;
         }
         if (Input.GetKeyDown(KeyCode.W) && canJump)
         {
@@ -32,9 +34,24 @@ public class SimpleController : MonoBehaviour
         }
     }
 
-    // Potential Problem: When player hits left, right, or top to something, canJump can still be evalauted to true;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        canJump = true;
+        ContactPoint2D contactPoint = collision.GetContact(0);
+        if (contactPoint.normal.y >= 0.0f)
+            canJump = true;
+        //rb.velocity = Vector2.right * 0.0f + Vector2.up;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        /*ContactPoint2D contactPoint = collision.GetContact(0);
+        if (contactPoint.normal.y >= 0.0f)
+            canJump = true;*/
+        //rb.velocity = Vector2.right * 0.0f + Vector2.up;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        rb.velocity = Vector2.right * 0.0f + Vector2.up * rb.velocity.y;
     }
 }
